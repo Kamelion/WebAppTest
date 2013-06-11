@@ -1,0 +1,18 @@
+<table class="table table-condensed table-striped" style="width: 50%;">
+	<thead>
+		<tr>
+			<td>Rank</td>
+			<td>Team</td>
+			<td>Points scored</td>
+			<td>Scored against</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="item in sortedTable2">
+			<td>{{$index + 1}}</td>
+			<td>{{item.team}}</td>
+			<td>{{item.offPoints}}</td>
+			<td>{{item.defPoints}}</td>
+		</tr>
+	</tbody>
+</table>

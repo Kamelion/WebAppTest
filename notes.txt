@@ -1,0 +1,4 @@
+C:/mongodb/bin/mongod.exe --dbpath D:/mongodb/data
+
+    .factory('socket', function () { return io.connect('http://localhost:8000'); });
+    .controller('MyCtrl2', [ '$scope', 'socket', function($scope, socket) {

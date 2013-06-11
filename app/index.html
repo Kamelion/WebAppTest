@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>My AngularJS App</title>
+  <link rel="stylesheet" href="../css/app.css" />
+  <link rel="stylesheet" href="../bootstrap/css/bootstrap.css"/>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+  <script>
+    $(function () {
+      // Setup drop down menu
+      $('.dropdown-menu').dropdown();
+
+      // Fix input element click problem
+      $('.dropdown-menu input, .dropdown-menu label').click(function (e) {
+        e.stopPropagation();
+      });
+
+      // Remove dropdown when Sign In button is clicked
+      $('#submit').click(function (e) {
+        $('.dropdown-menu').dropdown('toggle');
+      });
+    });
+  </script>
+</head>
+<body>
+    <div class="navbar navbar-static-top" ng-controller="MyCtrl1">
+      <div class="navbar-inner">
+        <div class="container">
+
+            <!-- Site name -->
+            <a class="brand">Andy's Sweet Test Site</a>
+
+            <!-- Start of the nav bar content -->
+            <div class="nav-collapse"><!-- Other nav bar content -->
+              
+              <!-- Drop down menu -->
+              <ul class="nav pull-right">
+                <li><a href="#/view2">Sign Up</a></li>
+                <li class="divider-vertical"></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
+                  <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+                    
+                    <!-- Login form here -->
+                    <form method="post" accept-charset="UTF-8" name="myForm">
+                      <input id="user_username" style="margin-bottom: 15px" type="text" name="username" size="30" placeholder="Username" ng-model="user.username"/>
+                      <input id="user_password" style="margin-bottom: 15px" type="password" name="password" size="30" placeholder="Password" ng-model="user.password"/>
+                      <input id="user_remember_me" style="float: left; margin-right: 10px;" type="checkbox" name="remember_me" value="1" ng-model="user.remember"/>
+                      <label class="string optional" for="user_remember_me">Remember me</label>
+                      <input class="btn btn-primary" style="clear: left; width: 100%; height: 32px; font-size: 13px;" type="submit" id="submit" name="submit" value="Sign In" ng-click="signin()" />
+                    </form>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <ul class="menu">
+      <li><a href="#/view1">view1</a></li>
+      <li><a href="#/view2">view2</a></li>
+    </ul>
+
+    <div ng-view></div>
+
+    <div>Angular seed app: v<span app-version></span></div>
+
+  <!--
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
+  -->
+  <script src="../lib/angular/angular.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/services.js"></script>
+  <script src="../js/controllers.js"></script>
+  <script src="../js/filters.js"></script>
+  <script src="../js/directives.js"></script>
+  <script src="../js/bootstrap-dropdown.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+</body>
+</html>
