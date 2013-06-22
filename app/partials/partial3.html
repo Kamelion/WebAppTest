@@ -1,0 +1,77 @@
+<ul class="menu">
+      <li><a href="#/view1">view1</a></li>
+      <li><a href="#/signup">Signup</a></li>
+</ul>
+<div class="container">
+	<div class="well">
+	<form method="POST" accept-charset="UTF-8" name="signupForm" class="form-horizontal" novalidate>
+		<legend>Sign Up</legend>
+			
+			<!-- User username block -->
+			<div class="control-group" ng-class="{'success': signupForm.username.$valid, 'error': signupForm.username.$invalid && signupForm.username.$dirty}">
+				<label for="newuser.username" class="control-label">Username</label>
+				<div class="controls">
+					<div class="input-prepend">
+						<span class="add-on"><i class="icon-user"></i></span>
+						<input type="text" size="30" name="username" ng-model="newuser.username" placeholder="User Name" autofocus>
+					</div>
+						<span class="label label-important" ng-show="signupForm.username.$error.unique">Username already exists.</span>
+						<span class="label label-important" ng-show="signupForm.username.$error.pattern || signupForm.username.$error.minlength || signupForm.username.$error.maxlength">Username must be between 6 and 12 alphanumeric characters.</span>
+						<span ng-class="{'valid': signupForm.username.$valid}"></span>
+				</div>
+			</div>
+
+			<!-- User email block -->
+			<div class="control-group" ng-class="{'success': signupForm.email.$valid, 'error': signupForm.email.$invalid && signupForm.email.$dirty}">
+				<label for="newuser.email" class="control-label">Email</label>
+				<div class="controls">
+					<div class="input-prepend">
+						<span class="add-on"><i class="icon-envelope"></i></span>
+						<input type="email" size="35" name="email" ng-model="newuser.email" placeholder="Email">
+					</div>
+						<span class="label label-important" ng-show="signupForm.email.$error.unique">E-mail is already registered.</span>
+						<span class="label label-important" ng-show="signupForm.email.$error.email">Invalid E-mail entry.
+						</span>
+						<span ng-class="{'valid': signupForm.email.$valid}"></span>
+				</div>
+			</div>
+
+			<hr>
+
+			<!-- User password block -->
+			<div class="control-group" ng-class="{'success': signupForm.pass.$valid, 'error': signupForm.pass.$invalid && signupForm.pass.$dirty}">
+				<label for="newuser.pass" class="control-label">Password</label>
+				<div class="controls">
+					<div class="input-prepend">
+						<span class="add-on"><i class="icon-lock"></i></span>
+						<input type="password" size="30" name="pass" ng-model="newuser.pass" placeholder="Password">
+					</div>
+						<span class="label label-important" ng-show="signupForm.pass.$error.minlength || signupForm.pass.$error.maxlength">Password must be between 8 and 25 characters.</span>
+						<span ng-class="{'valid': signupForm.pass.$valid}"></span>
+				</div>
+			</div>
+
+			<!-- User re-enter password block -->
+			<div class="control-group" ng-class="{'success': newuser.pass == newuser.pass2 && signupForm.pass2.$valid, 'error': signupForm.pass2.$invalid && signupForm.pass2.$dirty}">
+				<label for="newuser.pass2" class="control-label">Confirm Password</label>
+				<div class="controls">
+					<div class="input-prepend">
+						<span class="add-on"><i class="icon-lock"></i></span>
+						<input type="password" size="30" name="pass2" ng-model="newuser.pass2" placeholder="Re-Enter Password">
+					</div>
+						<span class="label label-important" ng-show="signupForm.pass2.$error.minlength || signupForm.pass2.$error.maxlength">Password must be between 8 and 25 characters.</span>
+						<span ng-class="{'valid': newuser.pass == newuser.pass2 && signupForm.pass2.$valid}"></span>
+				</div>
+			</div>
+
+			<!-- Submit button block -->
+			<div class="control-group">
+				<div class="controls">
+					<input type="submit" class="btn btn-success" ng-model="submit" ng-click="signup($event)" value="Create My Account">
+				</div>
+			</div>
+			
+				<div class="info custom_error" ng-show="flagged">Invalid information entered. Registration reset.</div>
+	</form>
+	</div>
+</div>
