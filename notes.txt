@@ -2,3 +2,21 @@ C:/mongodb/bin/mongod.exe --dbpath D:/mongodb/data
 
     .factory('socket', function () { return io.connect('http://localhost:8000'); });
     .controller('MyCtrl2', [ '$scope', 'socket', function($scope, socket) {
+
+git init
+git pull origin master
+git push origin master
+
+node: crypto for hashing password
+      token (sessionID) uuid
+
+C:/OpenSSL/bin
+   req -new -newkey rsa:1024 -nodes -config C:/openssl/openssl.cnf -keyout mykey.pem -out    myreq.pem
+
+OpenSSL certificate:
+   US, Florida, Cooper City, Local (Org name), None (Org unit name), Andrew,    alevak4921@gmail.com
+
+openssl genrsa -out key.pem
+openssl req -new -key key.pem -out csr.pem
+openssl x509 -req -days 9999 -in csr.pem -signkey key.pem -out cert.pem
+rm csr.pem

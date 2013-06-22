@@ -8,5 +8,5 @@
 angular.module('myApp.services', []).
   	value('version', '0.1').
   factory('socket', function () {
-		return io.connect('http://localhost:8000');
+		//return io.connect('http://localhost:8000');
 	});
