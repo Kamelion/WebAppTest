@@ -4,8 +4,11 @@ C:/mongodb/bin/mongod.exe --dbpath D:/mongodb/data
     .controller('MyCtrl2', [ '$scope', 'socket', function($scope, socket) {
 
 git init
-git pull origin master
+git pull origin master // merge and update paths
+git add . // add all files from current directory
 git push origin master
+
+// random other stuff: git log, git status
 
 node: crypto for hashing password
       token (sessionID) uuid
