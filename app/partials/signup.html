@@ -1,7 +1,3 @@
-<ul class="menu">
-      <li><a href="#/view1">view1</a></li>
-      <li><a href="#/signup">Signup</a></li>
-</ul>
 <div class="container">
 	<div class="well">
 	<form method="POST" accept-charset="UTF-8" name="signupForm" class="form-horizontal" novalidate>
@@ -13,7 +9,7 @@
 				<div class="controls">
 					<div class="input-prepend">
 						<span class="add-on"><i class="icon-user"></i></span>
-						<input type="text" size="30" name="username" ng-model="newuser.username" placeholder="User Name" autofocus>
+						<input type="text" size="30" name="username" ng-model="newuser.username" placeholder="User Name" required ng-unique autofocus ng-minlength="6" ng-maxlength="12" ng-pattern="/^[a-zA-Z0-9]{4,10}$/">
 					</div>
 						<span class="label label-important" ng-show="signupForm.username.$error.unique">Username already exists.</span>
 						<span class="label label-important" ng-show="signupForm.username.$error.pattern || signupForm.username.$error.minlength || signupForm.username.$error.maxlength">Username must be between 6 and 12 alphanumeric characters.</span>
@@ -27,9 +23,9 @@
 				<div class="controls">
 					<div class="input-prepend">
 						<span class="add-on"><i class="icon-envelope"></i></span>
-						<input type="email" size="35" name="email" ng-model="newuser.email" placeholder="Email">
+						<input type="email" size="35" name="email" ng-model="newuser.email" placeholder="Email" required>
 					</div>
-						<span class="label label-important" ng-show="signupForm.email.$error.unique">E-mail is already registered.</span>
+						<!-- In case I want to check for previously registered E-mail <span class="label label-important" ng-show="signupForm.email.$error.unique">E-mail is already registered.</span> -->
 						<span class="label label-important" ng-show="signupForm.email.$error.email">Invalid E-mail entry.
 						</span>
 						<span ng-class="{'valid': signupForm.email.$valid}"></span>
@@ -44,9 +40,9 @@
 				<div class="controls">
 					<div class="input-prepend">
 						<span class="add-on"><i class="icon-lock"></i></span>
-						<input type="password" size="30" name="pass" ng-model="newuser.pass" placeholder="Password">
+						<input type="password" size="30" name="pass" ng-model="newuser.pass" placeholder="Password" required ng-minlength="8">
 					</div>
-						<span class="label label-important" ng-show="signupForm.pass.$error.minlength || signupForm.pass.$error.maxlength">Password must be between 8 and 25 characters.</span>
+						<span class="label label-important" ng-show="signupForm.pass.$error.minlength">Password must be 8 characters minimum.</span>
 						<span ng-class="{'valid': signupForm.pass.$valid}"></span>
 				</div>
 			</div>
@@ -57,9 +53,9 @@
 				<div class="controls">
 					<div class="input-prepend">
 						<span class="add-on"><i class="icon-lock"></i></span>
-						<input type="password" size="30" name="pass2" ng-model="newuser.pass2" placeholder="Re-Enter Password">
+						<input type="password" size="30" name="pass2" ng-model="newuser.pass2" placeholder="Re-Enter Password"required ng-minlength="8">
 					</div>
-						<span class="label label-important" ng-show="signupForm.pass2.$error.minlength || signupForm.pass2.$error.maxlength">Password must be between 8 and 25 characters.</span>
+						<span class="label label-important" ng-show="newuser.pass != newuser.pass2">Password must match with the previous field.</span>
 						<span ng-class="{'valid': newuser.pass == newuser.pass2 && signupForm.pass2.$valid}"></span>
 				</div>
 			</div>
@@ -67,10 +63,11 @@
 			<!-- Submit button block -->
 			<div class="control-group">
 				<div class="controls">
-					<input type="submit" class="btn btn-success" ng-model="submit" ng-click="signup($event)" value="Create My Account">
+					<input ng-disabled="!signupForm.$valid || newuser.pass != newuser.pass2 || signupForm.$pristine" type="submit" class="btn btn-success" ng-model="submit" ng-click="signup($event)" value="Create My Account">
 				</div>
 			</div>
-			
+
+			<!-- Submission warning message with Javascript turned off -->
 				<div class="info custom_error" ng-show="flagged">Invalid information entered. Registration reset.</div>
 	</form>
 	</div>

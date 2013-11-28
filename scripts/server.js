@@ -81,6 +81,7 @@ app.configure(function(){
     store: new MongoStore(config.db)
   }));
   app.use(app.router);
+  console.log(__dirname);
 });
 
 app.get('/app', function (req, res) {
@@ -92,7 +93,6 @@ app.get('/app/index.html', function (req, res) {
 });
 
 app.get('/getsession', function (req, res) {
-  console.log(req.session);
   res.send(req.session);
 });
 
@@ -119,8 +119,7 @@ app.post('/signin', function (req, res) {
   req.assert('username', "Alphanumeric characters only.").is(/^[a-zA-Z0-9]{4,10}$/);
   // Password validation
   req.assert('password', "Will not submit with field empty.").notEmpty();
-
-  // Sanitize data to strip out common xss attack vectors
+  // strip out common xss attack vectors
   req.sanitize('username').xss();
   req.sanitize('password').xss();
 

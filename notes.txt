@@ -6,7 +6,10 @@ C:/mongodb/bin/mongod.exe --dbpath D:/mongodb/data
 git init
 git pull origin master // merge and update paths
 git add . // add all files from current directory
+git commit -a -m "comment"
 git push origin master
+
+git remote add <depository name> https://github/Kamelion/<depository name>.git
 
 // random other stuff: git log, git status
 

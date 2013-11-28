@@ -6,11 +6,80 @@
   <link rel="stylesheet" href="../bootstrap/css/bootstrap.css"/>
   <link rel="stylesheet" href="../css/app.css" />
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
-</head>
-<body>
-    <div ng-view></div>
+  <script>
+    $(function () {
+      // Setup drop down menu
+      $('.dropdown-menu').dropdown();
 
-    <div>Angular seed app: v<span app-version></span></div>
+      // Fix input element click problem
+      $('.dropdown-menu input, .dropdown-menu label').click(function (e) {
+        e.stopPropagation();
+      });
+
+      // Remove dropdown when Sign In button is clicked
+      $('#submit').click(function (e) {
+        $('.dropdown-menu').dropdown('toggle');
+      });
+    });
+</script>
+</head>
+<body ng-controller="MyCtrl1">
+  <div class="navbar navbar-static-top"> <!-- ng-controller="MyCtrl1" -->
+        <div class="navbar-inner">
+          <div class="container">
+              
+              <!-- Site name -->
+              <a href="#/home" class="brand">Andy's Sweet Test Site</a>
+
+              <ul class="nav">
+                <!-- Class toggle based on view to make class="active" true for whatever list item -->
+                <li ng-class="{active: isActive('/invaders')}"><a href="#/invaders">C# Invaders</a></li>
+                <li ng-class="{active: isActive('/webgl')}"><a href="#/webgl">WebGL</a></li>
+                <li ng-class="{active: isActive('/php')}"><a href="#/php">PHP/SQL?</a>
+                <li ng-class="{active: isActive('/java')}"><a href="#/java">Java?</a>
+                <li ng-class="{active: isActive('/sports')}"><a href="#/sports">Sports</a></li>
+              </ul>
+
+              <!-- Start of the nav bar content -->
+              <div class="nav-collapse"><!-- Other nav bar content -->
+                
+                <!-- Drop down menu -->
+                <ul class="nav pull-right">
+
+                  <!-- hide once you log in-->
+                  <li><a href="#/signup" ng-show="!loggedIn">Sign Up</a></li>  
+                  <li class="divider-vertical" ng-show="!loggedIn"></li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" ng-show="!loggedIn">Sign In <strong class="caret"></strong></a>
+                    <div class="dropdown-menu">
+                      
+                      <!-- Login form here -->
+                      <form method="post" accept-charset="UTF-8" name="myForm">
+                        <div class="control-group" ng-class="{'success': myForm.username.$error.unique }">
+                        <input id="user_username" type="text" name="username" size="30" placeholder="Username" ng-model="user.username" required ng-unique/>
+                        </div>
+                        <input id="user_password" type="password" name="password" size="30" placeholder="Password" ng-model="user.password" required/>
+                        <input id="user_remember_me" type="checkbox" name="remember_me" value="1" ng-model="user.remember"/>
+                        <label class="string optional" for="user_remember_me">Remember me</label>
+                        <input class="btn btn-primary" type="submit" id="submit" name="submit" value="Sign In" ng-click="signin()" />
+                      </form>
+                    </div>
+                  </li>
+
+                  <!-- Show once you've logged in -->
+                  <li><a href="" ng-show="loggedIn">Welcome, {{loggedInUser}}</a></li>
+                  <li class="divider-vertical" ng-show="loggedIn"></li>
+                  <li><a href="" ng-show="loggedIn" ng-click="logout()">Log Out </a></li>
+                </ul>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <hr>
+
+    <!-- Load partials into this div -->
+    <div ng-view></div>
 
   <!--
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
@@ -22,6 +91,8 @@
   <script src="../js/filters.js"></script>
   <script src="../js/directives.js"></script>
   <script src="../js/bootstrap-dropdown.js"></script>
+  <script src="../js/three.min.js" ></script>
+  <script src="../js/3Dtest.js" ></script>
   <!-- <script src="/socket.io/socket.io.js"></script> -->
 </body>
 </html>

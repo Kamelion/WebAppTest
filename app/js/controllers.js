@@ -3,7 +3,8 @@
 /* Controllers */
 
 angular.module('myApp.controllers', []).
-  controller('MyCtrl1', [ '$scope', '$http', '$rootScope', function($scope, $http, $rootScope) {
+  controller('MyCtrl1', [ '$scope', '$http', '$rootScope', '$location', 
+    function($scope, $http, $rootScope, $location) {
 
     $http.get('/getsession').success(function (data) {      
       if (data.cookie.originalMaxAge) {
@@ -19,9 +20,11 @@ angular.module('myApp.controllers', []).
         table = [],
         pointMargin = 0;
 
-    // ajax call to retrieve database information
-    $http.get('/DBinfo').success(init);
-
+    if ($location.path() === '/sports') {
+      // ajax call to retrieve database information
+      $http.get('/DBinfo').success(init);
+    }
+    
     function init (data) {
 
       table = data;
@@ -47,10 +50,13 @@ angular.module('myApp.controllers', []).
       $scope.sortedTable = angular.copy(sortedTable);      
     }
 
+    $scope.isActive = function(route) {
+      return route === $location.path();
+    }
+
     $scope.logout = function () {
       $rootScope.loggedIn = false;
       $http.get('/logout').success(function (data) {
-        console.log(data);
       });
     }
 
@@ -67,10 +73,8 @@ angular.module('myApp.controllers', []).
         $scope.flagged = false;
         $rootScope.loggedIn = true;
         $rootScope.loggedInUser = data.username;
-        //window.location.href = "#/view1";
-        console.log(data);
+        window.location.href = "#/home";
       }).error(function (data, status, headers, config) {
-        console.log(data);
         // Show error message on web page to user
         $scope.flagged = true;
 
@@ -89,16 +93,11 @@ angular.module('myApp.controllers', []).
         data: $scope.user,
         headers: {'Content-Type': 'application/json'}
       }).success(function (data) {
-        
-        console.log(data);
         $rootScope.loggedIn = true;
         $rootScope.loggedInUser = data.username;
 
         for (var field in $scope.user) { $scope.user[field] = "";}
-        
-        console.log($rootScope.loggedIn);
       }).error(function (data) {
-        console.log(data);
         for (var field in $scope.user) { $scope.user[field] = "";}
       });
     }
