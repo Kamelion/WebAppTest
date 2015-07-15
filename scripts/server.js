@@ -41,7 +41,7 @@ var config = {
 
 var cookieAge = 1000*60*3; // 3 minutes for test purposes
 
-// Deprecated because HTTP is for bitches
+// Deprecated
 /* http.createServer(app).listen(httpPort, function () {
   console.log("Express server listening on port: " + httpPort);
 }); */
